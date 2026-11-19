@@ -90,22 +90,50 @@ def DecimalToBinary(Number):
 # Exercise 4
 Stack = []
 TopOfStack = -1
+
 for i in range(8):
     Stack.append(-1)
 
+
+def Push(Item):
+    global Stack, TopOfStack
+
+    if TopOfStack == 7:
+        return False
+    else:
+        TopOfStack += 1
+        Stack[TopOfStack] = Item
+        return True
+
+
+def Pop():
+    global Stack, TopOfStack
+
+    if TopOfStack == -1:
+        return -1
+    else:
+        Item = Stack[TopOfStack]
+        TopOfStack -= 1
+        return Item
+
+
 def Editor(Commands):
     global Stack, TopOfStack
+
     TopOfStack = -1
+
     for command in Commands:
         parts = command.split(" ")
+
         if parts[0] == "type":
-            if TopOfStack < 7:
-                TopOfStack += 1
-                Stack[TopOfStack] = parts[1]
+            Push(parts[1])
+
         elif parts[0] == "undo":
-            if TopOfStack != -1:
-                TopOfStack -= 1
+            Pop()
+
     Str = ""
+
     for i in range(0, TopOfStack + 1):
         Str = Str + Stack[i]
+
     return Str
