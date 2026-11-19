@@ -15,9 +15,8 @@ def Push(Item):
 
 def Pop():
     global TopOfStack, Stack
-    Top = 0
     if TopOfStack == -1:
-        return False
+        return -1
     else:
         Top = Stack[TopOfStack]
         TopOfStack -= 1
