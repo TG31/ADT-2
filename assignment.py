@@ -1,35 +1,84 @@
-# You can remove 'pass' if you written code in the function
-# Do NOT use .append() or .pop() inside Push() and Pop() - move TopOfStack yourself.
-
 # Exercise 1
 Stack = []
 TopOfStack = -1
-# Write code here to fill Stack with 8 elements, all -1
-
+for i in range(8):
+    Stack.append(-1)
 
 def Push(Item):
-    # Write your code here
-    pass
-
+    global TopOfStack, Stack
+    if TopOfStack == 7:
+        return False
+    else:
+        TopOfStack += 1
+        Stack[TopOfStack] = Item
+        return True
 
 def Pop():
-    # Write your code here
-    pass
+    global TopOfStack, Stack
+    Top = 0
+    if TopOfStack == -1:
+        return False
+    else:
+        Top = Stack[TopOfStack]
+        TopOfStack -= 1
+    return Top
 
 
 # Exercise 2
+Stack = []
+TopOfStack = -1
+for i in range(8):
+    Stack.append(-1)
+
 def ShowStack():
-    # Write your code here
-    pass
+    global TopOfStack, Stack
+    Str = ""
+    for i in range(TopOfStack, -1, -1):
+        Str = Str + str(Stack[i]) + " "
+    return Str.strip()
 
 
 # Exercise 3
+Stack = []
+TopOfStack = -1
+for i in range(8):
+    Stack.append(-1)
+
 def DecimalToBinary(Number):
-    # Write your code here
-    pass
+    global Stack, TopOfStack
+    TopOfStack = -1
+    Str = ""
+    if Number == 0:
+        return 0
+    else:
+        while Number > 0:
+            TopOfStack += 1
+            Stack[TopOfStack] = Number % 2
+            Number = Number // 2
+        for i in range(TopOfStack, -1, -1):
+            Str = Str + str(Stack[i])
+        return Str
 
 
 # Exercise 4
+Stack = []
+TopOfStack = -1
+for i in range(8):
+    Stack.append(-1)
+
 def Editor(Commands):
-    # Write your code here
-    pass
+    global Stack, TopOfStack
+    TopOfStack = -1
+    for command in Commands:
+        parts = command.split(" ")
+        if parts[0] == "type":
+            if TopOfStack < 7:
+                TopOfStack += 1
+                Stack[TopOfStack] = parts[1]
+        elif parts[0] == "undo":
+            if TopOfStack != -1:
+                TopOfStack -= 1
+    Str = ""
+    for i in range(0, TopOfStack + 1):
+        Str = Str + Stack[i]
+    return Str
