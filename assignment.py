@@ -40,23 +40,51 @@ def ShowStack():
 # Exercise 3
 Stack = []
 TopOfStack = -1
+
 for i in range(8):
     Stack.append(-1)
 
+
+def Push(Item):
+    global Stack, TopOfStack
+
+    if TopOfStack == 7:
+        return False
+    else:
+        TopOfStack += 1
+        Stack[TopOfStack] = Item
+        return True
+
+
+def Pop():
+    global Stack, TopOfStack
+
+    if TopOfStack == -1:
+        return -1
+    else:
+        Item = Stack[TopOfStack]
+        TopOfStack -= 1
+        return Item
+
+
 def DecimalToBinary(Number):
     global Stack, TopOfStack
+
     TopOfStack = -1
-    Str = ""
+
     if Number == 0:
-        return 0
-    else:
-        while Number > 0:
-            TopOfStack += 1
-            Stack[TopOfStack] = Number % 2
-            Number = Number // 2
-        for i in range(TopOfStack, -1, -1):
-            Str = Str + str(Stack[i])
-        return Str
+        return "0"
+
+    while Number > 0:
+        Push(Number % 2)
+        Number = Number // 2
+
+    Str = ""
+
+    while TopOfStack != -1:
+        Str = Str + str(Pop())
+
+    return Str
 
 
 # Exercise 4
